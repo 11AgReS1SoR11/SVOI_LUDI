@@ -1,0 +1,4 @@
+easyocr
+phonenumbers
+spacy
+torchvision

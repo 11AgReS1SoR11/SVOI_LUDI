@@ -1,6 +1,7 @@
 #include "cardwindow.h"
 #include "ui_cardwindow.h"
 #include <QSqlError>
+
 CardWindow::CardWindow(const QString &filename, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CardWindow)
@@ -8,12 +9,6 @@ CardWindow::CardWindow(const QString &filename, QWidget *parent) :
     ui->setupUi(this);
 
     setWindowTitle("СВОИ ЛЮДИ - Загрузить визитку");
-
-    if (!Connection_to_database(db))
-    {
-        QMessageBox::critical(nullptr, "Ошибка", "Не удалось открыть базу данных");
-        return; // доделать, чтобы прога не открывалась
-    }
 
     imagepath = filename;
 
@@ -51,7 +46,8 @@ bool CardWindow::Connection_to_database(QSqlDatabase& db){
     else return true;
 }
 
-bool CheckForDate(const QString& Date){
+bool CheckForDate(const QString& Date)
+{
     if (Date.size() != 10) return false;
     if (Date[0].isDigit() && Date[1].isDigit() && Date[2].isDigit() && Date[3].isDigit() &&
         Date[4] == '-' && Date[5].isDigit() && Date[6].isDigit() &&
@@ -127,6 +123,13 @@ int CardWindow::AddTied(const QString& UserId, const QString& OrgId, const QStri
 
 void CardWindow::on_pushButton_clicked()
 {
+    if (!Connection_to_database(db))
+    {
+        QMessageBox::critical(nullptr, "Ошибка", "Не удалось открыть базу данных");
+        this->close();
+        return;
+    }
+
     QString Phone = this->Card->person->GetNumber();
     QString Position = this->Card->person->GetOccupation();
     QString Email = this->Card->person->GetEmail();
@@ -139,7 +142,7 @@ void CardWindow::on_pushButton_clicked()
 
     // копирование картинки в директорию
     QDir dir = QDir::current(); dir.cdUp();
-    QString path = dir.absolutePath() + "/Project2/Images/" + QFileInfo(imagepath).fileName();
+    QString path = dir.absolutePath() + "/../App/Images/" + QFileInfo(imagepath).fileName();
     qDebug() << QFile::copy(imagepath, path);
 
 
@@ -153,6 +156,6 @@ void CardWindow::on_pushButton_clicked()
     compite_message.exec();
     this->close();
 
-    // предложить занести в ежедневник
+    // TODO: занести в ежедневник
 }
 

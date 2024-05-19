@@ -176,6 +176,3 @@ void Human::SetTextAction(const QString &text)
 {
     Actions->setText(text);
 }
-
-
-

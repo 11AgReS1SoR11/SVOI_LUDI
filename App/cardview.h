@@ -2,11 +2,10 @@
 #define CARDVIEW_H
 
 #include <QDialog>
-#include <cardform.h>
 #include <QSqlQuery>
 #include <QVBoxLayout>
 
-//#include <startwindow.h>
+#include "cardform.h"
 
 namespace Ui {
 class CardView;

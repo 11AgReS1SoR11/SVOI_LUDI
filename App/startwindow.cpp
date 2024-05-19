@@ -13,10 +13,9 @@ StartWindow::StartWindow(QWidget *parent)
     if (!Connection_to_database(db))
     {
         QMessageBox::critical(nullptr, "Ошибка", "Не удалось открыть базу данных");
-        return; // доделать, чтобы прога не открывалась
     }
 
-    info = GetDesign(":/Design/Design");
+    info = GetDesign("../App/Design");
 
     ui->Download->setStyleSheet(info[0]);
     ui->MyCard->setStyleSheet(info[0]);
@@ -34,11 +33,14 @@ StartWindow::~StartWindow()
 QStringList StartWindow::GetDesign(const QString filepath)
 {
     QFile file(filepath);
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
         QByteArray data = file.readAll();
         QString text = QString::fromUtf8(data);
         return text.split("\n");
     }
+
+    throw std::runtime_error("Can't open file with Design");
 }
 
 void StartWindow::on_Download_clicked()
@@ -73,7 +75,8 @@ void StartWindow::on_Exit_clicked()
 }
 
 
-bool StartWindow::Connection_to_database(QSqlDatabase& db){
+bool StartWindow::Connection_to_database(QSqlDatabase& db)
+{
     // Открываю базу данных
     db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("127.0.0.1");

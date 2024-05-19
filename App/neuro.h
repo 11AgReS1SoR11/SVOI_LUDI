@@ -15,7 +15,7 @@
 class Neuro
 {
 public:
-   Neuro(const QString& filename_path, const QString& python_exe_path = "C:\\Users\\79916\\PycharmProjects\\Neuro\\venv\\Scripts\\python.exe", const QString& neuro_py_path = "C:\\Users\\79916\\PycharmProjects\\Neuro\\Neuro.py");
+    Neuro(const QString &filename_path, const QString &neuro_py_path = "../App/Neuro.py");
     ~Neuro();
     QString GetSurname();
     QString GetName();

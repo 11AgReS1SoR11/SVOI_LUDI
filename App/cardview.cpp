@@ -22,7 +22,7 @@ CardView::CardView(const QStringList& Design, QWidget *parent) :
     Layout->addWidget(Back);
 
     setLayout(Layout);
-    connect(Back, &QPushButton::clicked, this, CardView::on_pushButton_clicked);
+    connect(Back, &QPushButton::clicked, this, &CardView::on_pushButton_clicked);
 }
 
 CardView::~CardView()
@@ -51,7 +51,6 @@ void CardView::SetPersonInformation(QSqlQuery my_query)
     Person->SetTextFIO(my_query.value(1).toString() + " " + my_query.value(2).toString() + " " + my_query.value(3).toString());
     Person->SetTextINN(my_query.value(4).toString());
     Person->SetTextBirthday(my_query.value(5).toString());
-    //Person->SetTextDeath(my_query.value(6).toString());
     Person->SetTextAddress(my_query.value(8).toString());
     Person->SetTextNumber(my_query.value(13).toString());
     Person->SetTextEmail(my_query.value(14).toString());

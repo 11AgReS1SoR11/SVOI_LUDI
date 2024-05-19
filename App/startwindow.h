@@ -8,8 +8,8 @@
 #include <QFile>
 #include <QDir>
 
-#include <recognize.h>
-#include <visitki.h>
+#include "recognize.h"
+#include "visitki.h"
 
 
 QT_BEGIN_NAMESPACE

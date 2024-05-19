@@ -2,21 +2,21 @@
 #define VISITKI_H
 
 #include <QWidget>
-#include<QDialog>
-#include<QSqlQueryModel>
-#include<QScrollBar>
-#include<QGroupBox>
-#include<QScrollArea>
-#include<QPushButton>
-#include<QLabel>
-#include<QFrame>
-#include<QBoxLayout>
-#include<QWidget>
-#include<QMainWindow>
-#include<QVBoxLayout>
-#include<QFormLayout>
+#include <QDialog>
+#include <QSqlQueryModel>
+#include <QScrollBar>
+#include <QGroupBox>
+#include <QScrollArea>
+#include <QPushButton>
+#include <QLabel>
+#include <QFrame>
+#include <QBoxLayout>
+#include <QWidget>
+#include <QMainWindow>
+#include <QVBoxLayout>
+#include <QFormLayout>
 
-#include<cardview.h>
+#include "cardview.h"
 
 namespace Ui {
 class visitki;
@@ -40,9 +40,6 @@ public slots:
     void show_visitk();
     void onBackButtonClicked();
     void Slot();
-
-//private slots:
-//    void Slot();
 
 signals:
     void visitka(QSqlQuery);

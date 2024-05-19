@@ -18,7 +18,6 @@ CardForm::CardForm(QWidget *parent) :
     Image->setAutoFillBackground(true);
     Image->setPalette(palette);
     Image->setAlignment(Qt::AlignHCenter);
-    //Image->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
     Image->setFixedSize(550, 350);
     QHBoxLayout* IMG = new QHBoxLayout(this);
     IMG->addItem(space);
@@ -67,13 +66,13 @@ CardForm::CardForm(QWidget *parent) :
 
     setLayout(vBoxLayoutMain);
 
-    QStringList info = GetDesign(":/Design/Design");
+    QStringList info = GetDesign("../App/Design");
     widgetChoiceRegion->setStyleSheet(info[2]);
 }
 
-void CardForm::NeuroRecognize(const QString &filename, const QString &python_exe_path, const QString &neuro_py_path)
+void CardForm::NeuroRecognize(const QString &filename, const QString &neuro_py_path)
 {
-    Neuro N(filename, python_exe_path, neuro_py_path);
+    Neuro N(filename, neuro_py_path);
     this->person->SetTextFIO(N.GetSurname() + " " + N.GetName() + " " + N.GetFatherName());
     this->person->SetTextAddress(N.GetAddress());
     this->person->SetTextEmail(N.GetEmail());
@@ -95,11 +94,14 @@ void CardForm::SetPictures(const QString &filename)
 QStringList CardForm::GetDesign(const QString filepath)
 {
     QFile file(filepath);
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
         QByteArray data = file.readAll();
         QString text = QString::fromUtf8(data);
         return text.split("\n");
     }
+    
+    throw std::runtime_error("Can't open file with Design");
 }
 
 CardForm::~CardForm()

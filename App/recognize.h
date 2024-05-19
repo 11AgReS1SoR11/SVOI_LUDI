@@ -7,7 +7,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-#include <cardwindow.h>
+#include "cardwindow.h"
 
 namespace Ui {
 class Recognize;

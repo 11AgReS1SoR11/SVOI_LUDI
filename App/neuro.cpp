@@ -1,11 +1,51 @@
 
 #include "neuro.h"
+#include <QTimer>
+#include <QObject>
 
-Neuro::Neuro(const QString& filename_path, const QString& python_exe_path, const QString& neuro_py_path)
+QString findPythonInterpreter()
 {
+    QProcess process;
+    QString command = "python";
+#ifdef Q_OS_WIN
+    QStringList arguments{"/C", "where python"};
+    process.start("cmd.exe", arguments);
+#else
+    QStringList arguments{"-c", "which python3"};
+    process.start("/bin/sh", arguments);
+#endif
+    if (!process.waitForFinished())
+    {
+        qDebug() << "Failed to find Python interpreter";
+        return QString();
+    }
+
+    QString output = process.readAllStandardOutput().trimmed();
+    if (output.isEmpty())
+    {
+        qDebug() << "No Python interpreter found";
+        return QString();
+    }
+
+    qDebug() << "Found Python interpreter at" << output;
+    return output;
+}
+
+Neuro::Neuro(const QString& filename_path, const QString& neuro_py_path)
+{
+    QString python_exe_path = findPythonInterpreter();
+    if (python_exe_path.isEmpty())
+    {
+        QMessageBox::warning(nullptr, "Ошибка", "Не удалось найти интерпретатор Python");
+        return;
+    }
+
     QString query = python_exe_path + " " + neuro_py_path + " " + filename_path;
-    QStringList arguments;
-    arguments << "/c" << query;  //"C:\\Users\\79916\\PycharmProjects\\Neuro\\venv\\Scripts\\python.exe C:\\Users\\79916\\PycharmProjects\\Neuro\\Neuro.py C:/Users/79916/PycharmProjects/Neuro/13.JPG";
+#ifdef Q_OS_WIN
+    QStringList arguments{"/C", query};
+#else
+    QStringList arguments{"-c", query};
+#endif
 
     // Создаем объект QProgressDialog
     QProgressDialog progressDialog("Загрузка...", "Отмена", 0, 100);
@@ -13,14 +53,18 @@ Neuro::Neuro(const QString& filename_path, const QString& python_exe_path, const
     progressDialog.setWindowModality(Qt::WindowModal); // Блокирует основное окно приложения
     progressDialog.show();
     // Design
-    QStringList info = GetDesign(":/Design/Design");
+    QStringList info = GetDesign("../App/Design");
     progressDialog.setStyleSheet(info[4]);
 
     QProcess process;
+#ifdef Q_OS_WIN
     process.start("cmd.exe", arguments);
+#else
+    process.start("/bin/sh", arguments);
+#endif
     if (!process.waitForStarted())
     {
-        QMessageBox::warning(nullptr, "Ошибка", "Не удалось открыть cmd.exe");
+        QMessageBox::warning(nullptr, "Ошибка", "Не удалось открыть терминал");
         qDebug() << "Failed to start process";
         qDebug() << process.errorString(); // вывод ошибки
         process.waitForFinished();
@@ -33,7 +77,8 @@ Neuro::Neuro(const QString& filename_path, const QString& python_exe_path, const
     {
         // Обновляем прогресс выполнения процесса
         progressDialog.setValue(progressDialog.value() + 1);
-        if (progressDialog.wasCanceled()) {
+        if (progressDialog.wasCanceled())
+        {
             process.kill(); // Отменяем процесс при нажатии на кнопку "Cancel"
             break;
         }
@@ -43,13 +88,11 @@ Neuro::Neuro(const QString& filename_path, const QString& python_exe_path, const
 
     if (process.exitCode() == 1)
     {
-        QMessageBox::warning(nullptr, "Ошибка", "Не удалось найти компилятор Python");
-        qDebug() << "Failed to start process";
-        qDebug() << process.errorString(); // вывод ошибки
+        qDebug() << "Process finished with exit code" << process.exitCode() << ". Error: " << process.readAllStandardError();
     }
 
     Data = new QString(process.readAllStandardOutput());
-    qDebug() << "Process finished with exit code" << process.exitCode() << ". Error: " << process.readAllStandardError();
+    qDebug() << *Data;
 }
 
 
@@ -60,7 +103,7 @@ Neuro::~Neuro()
 
 QString Neuro::FindAttribute(const int start)
 {
-    const int end = Data->indexOf("\r", start);
+    const int end = Data->indexOf("\n", start);
     QString Attribute = Data->mid(start, end - start);
     if (Attribute == "None") return "";
     return Attribute;
@@ -69,11 +112,14 @@ QString Neuro::FindAttribute(const int start)
 QStringList Neuro::GetDesign(const QString filepath)
 {
     QFile file(filepath);
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
         QByteArray data = file.readAll();
         QString text = QString::fromUtf8(data);
         return text.split("\n");
     }
+
+    throw std::runtime_error("Can't open file with Design");
 }
 
 QString Neuro::GetSurname()

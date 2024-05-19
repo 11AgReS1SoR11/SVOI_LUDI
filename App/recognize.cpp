@@ -1,5 +1,6 @@
 #include "recognize.h"
 #include "ui_recognize.h"
+#include <QStandardPaths>
 
 Recognize::Recognize(const QStringList& Design, QWidget *parent) :
     QDialog(parent),
@@ -28,7 +29,11 @@ Recognize::~Recognize()
 
 void Recognize::on_ChooseFileButton_clicked()
 {
-    QString str = QFileDialog::getOpenFileName(this, "Выбрать картинку", "C:/Users/79916/Pictures", "jpg image (*.jpg);; png image (*.png);");
+    QString str = QFileDialog::getOpenFileName(
+        this, "Выбрать картинку", 
+        ".."/*QStandardPaths::writableLocation(QStandardPaths::PicturesLocation)*/, 
+        "jpg image (*.jpg);;png image (*.png);;All files (*.*)"
+    );
 
     QPixmap Picture_Pixmap(str);
     Picture_Pixmap = Picture_Pixmap.scaled(ui->Image->size(), Qt::KeepAspectRatio);
@@ -40,7 +45,7 @@ void Recognize::on_ChooseFileButton_clicked()
 
 void Recognize::on_OK_clicked()
 {
-    if (ui->Image->pixmap().isNull())
+    if (ui->Image->pixmap()->isNull())
     {
         QMessageBox::warning(nullptr, tr("Внимание"),
                              tr("Выберите изображение"),
@@ -53,7 +58,3 @@ void Recognize::on_OK_clicked()
         this->close();
     }
 }
-
-
-
-

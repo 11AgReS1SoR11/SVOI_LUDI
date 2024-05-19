@@ -16,10 +16,10 @@
 
 #include <QSqlQuery>
 
-#include <human.h>
-#include <org.h>
-#include <neuro.h>
-#include <cardform.h>
+#include "human.h"
+#include "org.h"
+#include "neuro.h"
+#include "cardform.h"
 
 namespace Ui {
 class CardWindow;
