@@ -4,30 +4,23 @@
 
 #include <QDialog>
 #include <QMessageBox>
-#include <QSqlDatabase>
 #include <QFile>
 #include <QDir>
 
 #include "recognize.h"
 #include "visitki.h"
 
-
-QT_BEGIN_NAMESPACE
-namespace Ui { class StartWindow; }
-QT_END_NAMESPACE
+namespace Ui
+{
+class StartWindow;
+}
 
 class StartWindow : public QDialog
-
 {
     Q_OBJECT
-
 public:
     StartWindow(QWidget *parent = nullptr);
     ~StartWindow();
-
-private:
-    QStringList GetDesign(const QString filepath);
-    bool Connection_to_database(QSqlDatabase& db);
 
 private slots:
     void on_Download_clicked();
@@ -36,11 +29,13 @@ private slots:
     void on_Exit_clicked();
 
 private:
+    QStringList GetDesign(const QString filepath);
+    bool Connection_to_database();
+
     Ui::StartWindow *ui;
-    QSqlDatabase db;
     Recognize* RecognizeWindow;
     visitki* VisitkiViewWindow;
-    QStringList info;
+    QStringList info; // Design information (will be shared with the rest of the classes)
 };
 
 #endif // STARTWINDOW_H

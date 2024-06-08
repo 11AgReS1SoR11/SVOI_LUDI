@@ -8,6 +8,7 @@ CardView::CardView(const QStringList& Design, QWidget *parent) :
     ui(new Ui::CardView)
 {
     ui->setupUi(this);
+
     setWindowTitle("СВОИ ЛЮДИ - Мои визитки");
 
     QVBoxLayout* Layout = new QVBoxLayout(this);
@@ -36,48 +37,49 @@ void CardView::on_pushButton_clicked()
     this->close();
 }
 
-
-void CardView::show_sl(QSqlQuery my_query)
+void CardView::cardReview(QPair<Human*, ORG*> my_query, int ID)
 {
-    this->show();
+    if (ID == 0)
+    {
+        qDebug() << "NO such data";
+        return; // TODO: warning message (not found)
+    }
+
     SetPersonInformation(my_query);
     SetORGInformation(my_query);
-    SetPictures(my_query.value(23).toString());
+    SetPictures("../App/Images/ID" + QString::number(ID) + ".jpg");
+    this->show();
 }
 
-void CardView::SetPersonInformation(QSqlQuery my_query)
+void CardView::SetPersonInformation(QPair<Human*, ORG*>& my_query)
 {
     Human* Person = this->Card->person;
-    Person->SetTextFIO(my_query.value(1).toString() + " " + my_query.value(2).toString() + " " + my_query.value(3).toString());
-    Person->SetTextINN(my_query.value(4).toString());
-    Person->SetTextBirthday(my_query.value(5).toString());
-    Person->SetTextAddress(my_query.value(8).toString());
-    Person->SetTextNumber(my_query.value(13).toString());
-    Person->SetTextEmail(my_query.value(14).toString());
-    Person->SetTextAction(my_query.value(15).toString());
-
-    // Из связи
-    Person->SetTextOccupation(my_query.value(21).toString());
+    Person->SetTextFIO(my_query.first->GetFIO());
+    Person->SetTextINN(my_query.first->GetINN());
+    Person->SetTextBirthday(my_query.first->GetBirthday());
+    Person->SetTextAddress(my_query.first->GetAddress());
+    Person->SetTextNumber(my_query.first->GetNumber());
+    Person->SetTextEmail(my_query.first->GetEmail());
+    Person->SetTextAction(my_query.first->GetActions());
+    Person->SetTextOccupation(my_query.first->GetOccupation());
 }
 
-void CardView::SetORGInformation(QSqlQuery my_query)
+void CardView::SetORGInformation(QPair<Human*, ORG*>& my_query)
 {
     ORG* Org = this->Card->org;
-    Org->SetTextName(my_query.value(29).toString());
-    Org->SetTextINN(my_query.value(30).toString());
-    Org->SetTextPravo(my_query.value(31).toString());
-    Org->SetTextBirthday(my_query.value(32).toString());
-    Org->SetTextDeath(my_query.value(33).toString());
-    Org->SetTextOKVED(my_query.value(35).toString());
-    Org->SetTextAction(my_query.value(36).toString());
-    Org->SetTextAddress(my_query.value(38).toString());
-    Org->SetTextSite(my_query.value(43).toString());
-    Org->SetTextEmail(my_query.value(44).toString());
+    Org->SetTextName(my_query.second->GetName());
+    Org->SetTextINN(my_query.second->GetINN());
+    Org->SetTextPravo(my_query.second->GetRight());
+    Org->SetTextBirthday(my_query.second->GetBirthday());
+    Org->SetTextDeath(my_query.second->GetDeath());
+    Org->SetTextOKVED(my_query.second->GetOKVED());
+    Org->SetTextAction(my_query.second->GetActions());
+    Org->SetTextAddress(my_query.second->GetAddress());
+    Org->SetTextSite(my_query.second->GetSite());
+    Org->SetTextEmail(my_query.second->GetEmail());
 }
 
 void CardView::SetPictures(const QString &filename)
 {
     Card->SetPictures(filename);
 }
-
-

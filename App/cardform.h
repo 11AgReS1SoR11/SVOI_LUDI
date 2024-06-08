@@ -17,27 +17,29 @@
 #include "org.h"
 #include "neuro.h"
 
-namespace Ui {
+namespace Ui
+{
 class CardForm;
 }
 
 class CardForm : public QWidget
 {
     Q_OBJECT
-
 public:
     explicit CardForm(QWidget *parent = nullptr);
     ~CardForm();
     void NeuroRecognize(const QString &filename, const QString& neuro_py_path = "../App/Neuro.py");
-    Human* person;
-    ORG* org;
     void SetPictures(const QString& filename);
 
+    Human* person;
+    ORG* org;
+
 private:
+    QStringList GetDesign(const QString filepath);
+
     Ui::CardForm *ui;
     QFormLayout *Layout;
     QLabel* Image;
-    QStringList GetDesign(const QString filepath);
 };
 
 #endif // CARDFORM_H

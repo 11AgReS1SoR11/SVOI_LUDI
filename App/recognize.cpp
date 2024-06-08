@@ -10,12 +10,13 @@ Recognize::Recognize(const QStringList& Design, QWidget *parent) :
 
     setWindowTitle("СВОИ ЛЮДИ - Загрузить визитку");
 
-    // Пока картинка не выбрана - чёрный цвет
+    // Until the picture is selected, the color is black
     QPalette palette;
     palette.setColor(QPalette::Window, Qt::black);
     ui->Image->setAutoFillBackground(true);
     ui->Image->setPalette(palette);
 
+    // Set button design
     ui->ChooseFileButton->setMinimumHeight(35);
     ui->OK->setMinimumHeight(35);
     ui->ChooseFileButton->setStyleSheet(Design[0]);
@@ -29,29 +30,31 @@ Recognize::~Recognize()
 
 void Recognize::on_ChooseFileButton_clicked()
 {
+    // Open the file explorer and get filepath
     QString str = QFileDialog::getOpenFileName(
         this, "Выбрать картинку", 
-        ".."/*QStandardPaths::writableLocation(QStandardPaths::PicturesLocation)*/, 
+        ".."/*TODO: QStandardPaths::writableLocation(QStandardPaths::PicturesLocation)*/, 
         "jpg image (*.jpg);;png image (*.png);;All files (*.*)"
     );
+    ui->ChooseFileButton->setText(str);
 
+    // Get image
     QPixmap Picture_Pixmap(str);
     Picture_Pixmap = Picture_Pixmap.scaled(ui->Image->size(), Qt::KeepAspectRatio);
     ui->Image->setPixmap(Picture_Pixmap);
-    if (str.size() != 0)
-        ui->ChooseFileButton->setText(str);
 }
 
 
 void Recognize::on_OK_clicked()
 {
+    // If the picture is not selected, the reminder window pops up
     if (ui->Image->pixmap()->isNull())
     {
         QMessageBox::warning(nullptr, tr("Внимание"),
                              tr("Выберите изображение"),
                              QMessageBox::Ok);
     }
-    else
+    else // The recognition process
     {
         cardwin = new CardWindow(ui->ChooseFileButton->text(), this);
         cardwin->exec();

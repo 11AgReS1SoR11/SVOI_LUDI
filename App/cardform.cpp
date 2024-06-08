@@ -10,8 +10,7 @@ CardForm::CardForm(QWidget *parent) :
     Layout = new QFormLayout();
     QSpacerItem* space = new QSpacerItem(0,5, QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-
-    // картинка
+    // Set image
     Image = new QLabel(this);
     QPalette palette;
     palette.setColor(QPalette::Window, Qt::black);
@@ -19,41 +18,41 @@ CardForm::CardForm(QWidget *parent) :
     Image->setPalette(palette);
     Image->setAlignment(Qt::AlignHCenter);
     Image->setFixedSize(550, 350);
-    QHBoxLayout* IMG = new QHBoxLayout(this);
-    IMG->addItem(space);
-    IMG->addWidget(Image);
-    IMG->addItem(space);
 
+    // Add image to layout
+    QHBoxLayout* IMG = new QHBoxLayout(this);
+    IMG->addItem(space); // add some space
+    IMG->addWidget(Image);
+    IMG->addItem(space); // add some space
     QWidget* tmp = new QWidget(this);
     tmp->setLayout(IMG);
-
     Layout->addWidget(tmp);
 
-    // информация о человеке
+    // Human information
     person = new Human(this);
     Layout->addWidget(person);
 
-    // пробел
+    // add some space
     Layout->addItem(space);
     Layout->addItem(space);
 
-    // информация об организации
+    // Organization information
     org = new ORG(this);
     Layout->addWidget(org);
 
-    // Располагаться будут на виджете
+    // Set to widget
     QWidget *widgetChoiceRegion = new QWidget();
     widgetChoiceRegion->setLayout(Layout);
 
-    // Помещаем виджет с кнопками в скролл зону
+    // Putting the widget with buttons in the scroll zone
     QScrollArea *scrollArea = new QScrollArea();
     scrollArea->setFrameShape(QFrame::NoFrame);
     scrollArea->setWidgetResizable(true);
     scrollArea->setWidget(widgetChoiceRegion);
 
-    // Для размещения скролл-зоны с кнопками на group box
-    // нужно будет создать еще один компоновщик - компоновщик group box
-    // поместим на нем скролл-зону
+    // To place a scroll zone with buttons on the group box
+    // you will need to create another linker - the group boxlinker
+    // we will place a scroll zone on it
     QVBoxLayout *vBoxLayout = new QVBoxLayout();
     vBoxLayout->addWidget(scrollArea);
 
@@ -72,7 +71,8 @@ CardForm::CardForm(QWidget *parent) :
 
 void CardForm::NeuroRecognize(const QString &filename, const QString &neuro_py_path)
 {
-    Neuro N(filename, neuro_py_path);
+    Neuro N(filename, neuro_py_path); // recognizing
+
     this->person->SetTextFIO(N.GetSurname() + " " + N.GetName() + " " + N.GetFatherName());
     this->person->SetTextAddress(N.GetAddress());
     this->person->SetTextEmail(N.GetEmail());

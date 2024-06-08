@@ -14,31 +14,23 @@
 #include <QFileInfo>
 #include <QDir>
 
-#include <QSqlQuery>
-
 #include "human.h"
 #include "org.h"
 #include "neuro.h"
 #include "cardform.h"
+#include "Database.h"
 
-namespace Ui {
+namespace Ui
+{
 class CardWindow;
 }
 
 class CardWindow : public QDialog
 {
     Q_OBJECT
-
 public:
     explicit CardWindow(const QString &filename, QWidget *parent = nullptr);
     ~CardWindow();
-
-    bool Connection_to_database(QSqlDatabase& db);
-
-    int AddPerson();
-    int AddORG();
-    int AddPhone(const QString& PhoneNumber, const QString& PhoneTiedId);
-    int AddTied(const QString& UserId, const QString& OrgId, const QString& Position, const QString& Email, const QString& image_path);
 
 public slots:
     void on_pushButton_clicked();
@@ -46,7 +38,7 @@ public slots:
 protected:
     Ui::CardWindow *ui;
     CardForm* Card;
-    QSqlDatabase db;
+    Database db;
     QString imagepath;
 };
 

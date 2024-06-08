@@ -9,8 +9,11 @@
 #include <QSpacerItem>
 #include <QPushButton>
 #include <QLineEdit>
+#include <QJsonArray>
+#include <QJsonObject>
 
-namespace Ui {
+namespace Ui
+{
 class Human;
 }
 
@@ -19,22 +22,23 @@ class Human : public QWidget
     Q_OBJECT
 
 public:
-    explicit Human(QWidget *parent = nullptr);
+    explicit Human(QWidget* parent = nullptr);
+    explicit Human(const QJsonObject& json, QWidget* parent = nullptr);
     ~Human();
-    QString GetFIO();
-    QString GetName();
-    QString GetSurname();
-    QString GetFatherName();
-    QString GetBirthday();
-    QString GetAddress();
-    QString GetActions();
-    QString GetTitul();
-    QString GetNumber();
-    QString GetEmail();
-    QString GetFacebook();
-    QString GetOccupation();
-    QString GetINN();
-    QString GetComment();
+    QString GetFIO() const;
+    QString GetName() const;
+    QString GetSurname() const;
+    QString GetFatherName() const;
+    QString GetBirthday() const;
+    QString GetAddress() const;
+    QString GetActions() const;
+    QString GetTitul() const;
+    QString GetNumber() const;
+    QString GetEmail() const;
+    QString GetFacebook() const;
+    QString GetOccupation() const;
+    QString GetINN() const;
+    QString GetComment() const;
     void SetTextFIO(const QString& text);
     void SetTextAddress(const QString& text);
     void SetTextNumber(const QString& text);
@@ -43,7 +47,6 @@ public:
     void SetTextBirthday(const QString& text);
     void SetTextINN(const QString& text);
     void SetTextAction(const QString& text);
-
 
 private:
     Ui::Human *ui;

@@ -1,0 +1,206 @@
+[
+    {
+        "ID1": {
+            "Organization": {
+                "Actions": "OrgActions",
+                "Address": "OrgAddress",
+                "Birthday": "OrgBirthday",
+                "Comment": "OrgComment",
+                "Death": "OrgDeath",
+                "Email": "OrgEmail",
+                "INN": "OrgINN",
+                "Name": "OrgName",
+                "Number": "OrgNumber",
+                "OKVED": "OrgOKVED",
+                "Right": "OrgRight",
+                "Site": "OrgSite"
+            },
+            "User": {
+                "Actions": "Actions",
+                "Address": "Address",
+                "Birthday": "Birthday",
+                "Comment": "Comment",
+                "Email": "Email",
+                "FIO": "Full Name",
+                "Facebook": "Facebook",
+                "FatherName": "Father Name",
+                "INN": "INN",
+                "Name": "Name",
+                "Number": "Number",
+                "Occupation": "Occupation",
+                "Surname": "Surname",
+                "Titul": "Title"
+            }
+        }
+    },
+    {
+        "ID2": {
+            "Organization": {
+                "Actions": "OrgActions",
+                "Address": "OrgAddress",
+                "Birthday": "OrgBirthday",
+                "Comment": "OrgComment",
+                "Death": "OrgDeath",
+                "Email": "OrgEmail",
+                "INN": "OrgINN",
+                "Name": "OrgName",
+                "Number": "OrgNumber",
+                "OKVED": "OrgOKVED",
+                "Right": "OrgRight",
+                "Site": "OrgSite"
+            },
+            "User": {
+                "Actions": "Actions",
+                "Address": "Address",
+                "Birthday": "Birthday",
+                "Comment": "Comment",
+                "Email": "Email",
+                "FIO": "Full Name",
+                "Facebook": "Facebook",
+                "FatherName": "Father Name",
+                "INN": "INN",
+                "Name": "Name",
+                "Number": "Number",
+                "Occupation": "Occupation",
+                "Surname": "Surname",
+                "Titul": "Title"
+            }
+        }
+    },
+    {
+        "ID3": {
+            "Organization": {
+                "Actions": "OrgActions",
+                "Address": "OrgAddress",
+                "Birthday": "OrgBirthday",
+                "Comment": "OrgComment",
+                "Death": "OrgDeath",
+                "Email": "OrgEmail",
+                "INN": "OrgINN",
+                "Name": "OrgName",
+                "Number": "OrgNumber",
+                "OKVED": "OrgOKVED",
+                "Right": "OrgRight",
+                "Site": "OrgSite"
+            },
+            "User": {
+                "Actions": "Actions",
+                "Address": "Address",
+                "Birthday": "Birthday",
+                "Comment": "Comment",
+                "Email": "Email",
+                "FIO": "Full Name",
+                "Facebook": "Facebook",
+                "FatherName": "Father Name",
+                "INN": "INN",
+                "Name": "Name",
+                "Number": "Number",
+                "Occupation": "Occupation",
+                "Surname": "Surname",
+                "Titul": "Title"
+            }
+        }
+    },
+    {
+        "ID4": {
+            "Organization": {
+                "Actions": "OrgActions",
+                "Address": "OrgAddress",
+                "Birthday": "OrgBirthday",
+                "Comment": "OrgComment",
+                "Death": "OrgDeath",
+                "Email": "OrgEmail",
+                "INN": "OrgINN",
+                "Name": "OrgName",
+                "Number": "OrgNumber",
+                "OKVED": "OrgOKVED",
+                "Right": "OrgRight",
+                "Site": "OrgSite"
+            },
+            "User": {
+                "Actions": "Actions",
+                "Address": "Address",
+                "Birthday": "Birthday",
+                "Comment": "Comment",
+                "Email": "Email",
+                "FIO": "Full Name",
+                "Facebook": "Facebook",
+                "FatherName": "Father Name",
+                "INN": "INN",
+                "Name": "Name",
+                "Number": "Number",
+                "Occupation": "Occupation",
+                "Surname": "Surname",
+                "Titul": "Title"
+            }
+        }
+    },
+    {
+        "ID5": {
+            "Organization": {
+                "Actions": "OrgActions",
+                "Address": "OrgAddress",
+                "Birthday": "OrgBirthday",
+                "Comment": "OrgComment",
+                "Death": "OrgDeath",
+                "Email": "OrgEmail",
+                "INN": "OrgINN",
+                "Name": "OrgName",
+                "Number": "OrgNumber",
+                "OKVED": "OrgOKVED",
+                "Right": "OrgRight",
+                "Site": "OrgSite"
+            },
+            "User": {
+                "Actions": "Actions",
+                "Address": "Address",
+                "Birthday": "Birthday",
+                "Comment": "Comment",
+                "Email": "Email",
+                "FIO": "Full Name",
+                "Facebook": "Facebook",
+                "FatherName": "Father Name",
+                "INN": "INN",
+                "Name": "Name",
+                "Number": "Number",
+                "Occupation": "Occupation",
+                "Surname": "Surname",
+                "Titul": "Title"
+            }
+        }
+    },
+    {
+        "ID6": {
+            "Organization": {
+                "Actions": "OrgActions",
+                "Address": "OrgAddress",
+                "Birthday": "OrgBirthday",
+                "Comment": "OrgComment",
+                "Death": "OrgDeath",
+                "Email": "OrgEmail",
+                "INN": "OrgINN",
+                "Name": "OrgName",
+                "Number": "OrgNumber",
+                "OKVED": "OrgOKVED",
+                "Right": "OrgRight",
+                "Site": "OrgSite"
+            },
+            "User": {
+                "Actions": "Actions",
+                "Address": "Address",
+                "Birthday": "Birthday",
+                "Comment": "Comment",
+                "Email": "Email",
+                "FIO": "Full Name",
+                "Facebook": "Facebook",
+                "FatherName": "Father Name",
+                "INN": "INN",
+                "Name": "Name",
+                "Number": "Number",
+                "Occupation": "Occupation",
+                "Surname": "Surname",
+                "Titul": "Title"
+            }
+        }
+    }
+]

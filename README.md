@@ -1,17 +1,21 @@
-# SVOI_LUDI
+## SVOI_LUDI
 Application for storing and recognizing business cards
 
+# Requirements
+1) C++
+2) python3
+3) Qt5
+4) qmake
 
-Приложение "SVOI LUDI", 2023, free source, в создании участвовали: Басалаев Данил, Клыков Александр, Асанов Дамир.
-Распознавание визиток, систематизация и поиск информации.
-Требования:
- операционная система Windows 10 https://www.microsoft.com/ru-ru/store/b/windows,  
- компилятор Python3 https://www.python.org/downloads/,
- C++ https://visualstudio.microsoft.com/ru/vs/features/cplusplus/,
- QtCreator https://www.qt.io/download,
- MySQL https://www.mysql.com/downloads/,
- библиотеки Python easyocr, re, phonenumbers, space, sys
-Руководство по установке: Установить всё необходимое, распаковать файлы в соответсвующие директории.
-Затем в Python установить библиотеки при помощи команды pip install (pip install easyocr; pip install re...)
-Выключить антивирусные программы, так как они могут не допустить запуск неизвестного файла.
-Запустить через QtCreator. 
+# Build
+To build and install dependencies, enter the command
+```bash
+bash Build
+```
+
+# Run
+```bash
+bash run
+```
+
+Created By Юрий Завадский и Виктор Яранцев 5030103/10301

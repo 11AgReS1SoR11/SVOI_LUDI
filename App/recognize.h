@@ -9,7 +9,8 @@
 
 #include "cardwindow.h"
 
-namespace Ui {
+namespace Ui
+{
 class Recognize;
 }
 
@@ -23,7 +24,6 @@ public:
 
 private slots:
     void on_ChooseFileButton_clicked();
-
     void on_OK_clicked();
 
 private:

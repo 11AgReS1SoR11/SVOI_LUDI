@@ -36,6 +36,63 @@ ORG::ORG(QWidget *parent) :
     Layout->addRow(tr("&Комментарий:"), Comment);
 }
 
+ORG::ORG(const QJsonObject& json, QWidget* parent) :
+    QWidget(parent),
+    ui(new Ui::ORG)
+{
+    ui->setupUi(this);
+
+    Layout = new QFormLayout(this);
+
+    Name = new QLineEdit(this);
+    Name->setText(json["Name"].toString());
+    Layout->addRow(tr("&Организация:"), Name);
+
+    Right = new QLineEdit(this);
+    Right->setText(json["Right"].toString());
+    Layout->addRow(tr("&Правовая форма:"), Right);
+
+    INN = new QLineEdit(this);
+    INN->setText(json["INN"].toString());
+    Layout->addRow(tr("&ИНН:"), INN);
+
+    Birthday = new QLineEdit(this);
+    Birthday->setText(json["Birthday"].toString());
+    Layout->addRow(tr("&Дата создания:"), Birthday);
+
+    Death = new QLineEdit(this);
+    Death->setText(json["Death"].toString());
+    Layout->addRow(tr("&Дата ликвидации:"), Death);
+
+    OKVED = new QLineEdit(this);
+    OKVED->setText(json["OKVED"].toString());
+    Layout->addRow(tr("&ОКВЭД:"), OKVED);
+
+    Actions = new QLineEdit(this);
+    Actions->setText(json["Actions"].toString());
+    Layout->addRow(tr("&Род деятельности:"), Actions);
+
+    Address = new QLineEdit(this);
+    Address->setText(json["Address"].toString());
+    Layout->addRow(tr("&Адрес:"), Address);
+
+    Site = new QLineEdit(this);
+    Site->setText(json["Site"].toString());
+    Layout->addRow(tr("&Сайт:"), Site);
+
+    Number = new QLineEdit(this);
+    Number->setText(json["Number"].toString());
+    Layout->addRow(tr("&Телефон:"), Number);
+
+    Email = new QLineEdit(this);
+    Email->setText(json["Email"].toString());
+    Layout->addRow(tr("&Эл. Почта:"), Email);
+
+    Comment = new QLineEdit(this);
+    Comment->setText(json["Comment"].toString());
+    Layout->addRow(tr("&Комментарий:"), Comment);
+}
+
 ORG::~ORG()
 {
     delete ui;
@@ -53,62 +110,62 @@ ORG::~ORG()
     delete Comment;
 }
 
-QString ORG::GetName()
+QString ORG::GetName() const
 {
     return Name->text();
 }
 
-QString ORG::GetRight()
+QString ORG::GetRight() const
 {
     return Right->text();
 }
 
-QString ORG::GetINN()
+QString ORG::GetINN() const
 {
     return INN->text();
 }
 
-QString ORG::GetBirthday()
+QString ORG::GetBirthday() const
 {
     return Birthday->text();
 }
 
-QString ORG::GetDeath()
+QString ORG::GetDeath() const
 {
     return Death->text();
 }
 
-QString ORG::GetOKVED()
+QString ORG::GetOKVED() const
 {
     return OKVED->text();
 }
 
-QString ORG::GetActions()
+QString ORG::GetActions() const
 {
     return Actions->text();
 }
 
-QString ORG::GetAddress()
+QString ORG::GetAddress() const
 {
     return Address->text();
 }
 
-QString ORG::GetSite()
+QString ORG::GetSite() const
 {
     return Site->text();
 }
 
-QString ORG::GetNumber()
+QString ORG::GetNumber() const
 {
     return Number->text();
 }
 
-QString ORG::GetEmail()
+QString ORG::GetEmail() const
 {
     return Email->text();
 }
 
-QString ORG::GetComment()
+QString ORG::GetComment() const
 {
     return Comment->text();
 }

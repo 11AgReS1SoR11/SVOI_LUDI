@@ -10,18 +10,17 @@ StartWindow::StartWindow(QWidget *parent)
 
     setWindowTitle("СВОИ ЛЮДИ");
 
-    if (!Connection_to_database(db))
+    if (!Connection_to_database()) // try connect to database
     {
         QMessageBox::critical(nullptr, "Ошибка", "Не удалось открыть базу данных");
     }
 
+    // Setting design
     info = GetDesign("../App/Design");
-
     ui->Download->setStyleSheet(info[0]);
     ui->MyCard->setStyleSheet(info[0]);
     ui->Daily->setStyleSheet(info[0]);
     ui->Exit->setStyleSheet(info[0]);
-
     this->setStyleSheet(info[1]);
 }
 
@@ -49,43 +48,32 @@ void StartWindow::on_Download_clicked()
     RecognizeWindow->exec();
 }
 
-
 void StartWindow::on_MyCard_clicked()
 {
     VisitkiViewWindow = new visitki(info, this);
     VisitkiViewWindow->exec();
 }
 
-
-void StartWindow::on_Daily_clicked()
+void StartWindow::on_Daily_clicked() // Not implemented yet
 {
     QMessageBox::warning(this, tr("Внимание"),
                              tr("Данной функции ещё нет\nно она скоро появится"),
                              QMessageBox::Ok);
 }
 
-
 void StartWindow::on_Exit_clicked()
 {
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Выход", "Вы уверены?", QMessageBox::Yes|QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
+    if (reply == QMessageBox::Yes)
+    {
         qApp->quit();
     }
 }
 
-
-bool StartWindow::Connection_to_database(QSqlDatabase& db)
+bool StartWindow::Connection_to_database() // checks the existence of a data file
 {
-    // Открываю базу данных
-    db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("127.0.0.1");
-    db.setDatabaseName("Databasa");
-    db.setUserName("root");
-    db.setPassword("Daniil1102*");
-
-    // Если не открылась база данных, то вывожу сообщение об ошибки и завершаю
-    if (!db.open()) return false;
-    else return true;
+    QFile f("../App/Data.json");
+    if (f.exists()) return true;
+    return false;
 }
-

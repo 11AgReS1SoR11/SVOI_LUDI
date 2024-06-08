@@ -3,17 +3,20 @@
 #include <QTimer>
 #include <QObject>
 
+// Getting the path to the python interpreter
 QString findPythonInterpreter()
 {
     QProcess process;
     QString command = "python";
-#ifdef Q_OS_WIN
+
+#ifdef Q_OS_WIN // if windows os
     QStringList arguments{"/C", "where python"};
     process.start("cmd.exe", arguments);
-#else
+#else // if linux os
     QStringList arguments{"-c", "which python3"};
     process.start("/bin/sh", arguments);
 #endif
+
     if (!process.waitForFinished())
     {
         qDebug() << "Failed to find Python interpreter";
@@ -40,61 +43,65 @@ Neuro::Neuro(const QString& filename_path, const QString& neuro_py_path)
         return;
     }
 
+    // Filling in command line arguments (python file and image path)
     QString query = python_exe_path + " " + neuro_py_path + " " + filename_path;
-#ifdef Q_OS_WIN
+#ifdef Q_OS_WIN // if windows of
     QStringList arguments{"/C", query};
-#else
+#else // if linux os
     QStringList arguments{"-c", query};
 #endif
 
-    // Создаем объект QProgressDialog
+    // Download window
     QProgressDialog progressDialog("Загрузка...", "Отмена", 0, 100);
     progressDialog.setWindowTitle(" ");
     progressDialog.setWindowModality(Qt::WindowModal); // Блокирует основное окно приложения
     progressDialog.show();
-    // Design
+    // set Design
     QStringList info = GetDesign("../App/Design");
     progressDialog.setStyleSheet(info[4]);
 
+
+    // start python algorithm
     QProcess process;
-#ifdef Q_OS_WIN
+#ifdef Q_OS_WIN // if windows of
     process.start("cmd.exe", arguments);
-#else
+#else // if linux os
     process.start("/bin/sh", arguments);
 #endif
+
+    // fail process
     if (!process.waitForStarted())
     {
-        QMessageBox::warning(nullptr, "Ошибка", "Не удалось открыть терминал");
-        qDebug() << "Failed to start process";
-        qDebug() << process.errorString(); // вывод ошибки
+        QMessageBox::warning(nullptr, "Ошибка", "Failed to start process");
+        qDebug() << process.errorString(); // print error
         process.waitForFinished();
         progressDialog.close();
-        return; // доделать, чтобы прога не открывалась
+        return;
     }
 
-    // Ожидаем завершения процесса
+    // Waiting for the completion of the process
     while (!process.waitForFinished(100))
     {
-        // Обновляем прогресс выполнения процесса
+        // Updating the progress of the process
         progressDialog.setValue(progressDialog.value() + 1);
         if (progressDialog.wasCanceled())
         {
-            process.kill(); // Отменяем процесс при нажатии на кнопку "Cancel"
+            process.kill(); // Cancel the process by clicking on the "Cancel" button
             break;
         }
     }
-    // Закрываем окно после завершения процесса
+
+    // We close the window after the process is completed
     progressDialog.close();
 
-    if (process.exitCode() == 1)
+    if (process.exitCode() == 1) // error
     {
         qDebug() << "Process finished with exit code" << process.exitCode() << ". Error: " << process.readAllStandardError();
     }
 
     Data = new QString(process.readAllStandardOutput());
-    qDebug() << *Data;
+    qDebug() << *Data; // print output data
 }
-
 
 Neuro::~Neuro()
 {

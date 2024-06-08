@@ -2,12 +2,12 @@
 #define CARDVIEW_H
 
 #include <QDialog>
-#include <QSqlQuery>
 #include <QVBoxLayout>
 
 #include "cardform.h"
 
-namespace Ui {
+namespace Ui
+{
 class CardView;
 }
 
@@ -20,12 +20,12 @@ public:
     ~CardView();
 
 private:
-    void SetPersonInformation(QSqlQuery my_query);
-    void SetORGInformation(QSqlQuery my_query);
+    void SetPersonInformation(QPair<Human*, ORG*>& my_query);
+    void SetORGInformation(QPair<Human*, ORG*>& my_query);
     void SetPictures(const QString& filename);
 
 public slots:
-    void show_sl(QSqlQuery);
+    void cardReview(QPair<Human*, ORG*>, int);
     void on_pushButton_clicked();
 
 private:

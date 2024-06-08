@@ -9,30 +9,33 @@
 #include <QSpacerItem>
 #include <QPushButton>
 #include <QLineEdit>
+#include <QJsonArray>
+#include <QJsonObject>
 
-namespace Ui {
+namespace Ui
+{
 class ORG;
 }
 
 class ORG : public QWidget
 {
     Q_OBJECT
-
 public:
     explicit ORG(QWidget *parent = nullptr);
+    explicit ORG(const QJsonObject& json, QWidget* parent = nullptr);
     ~ORG();
-    QString GetName();
-    QString GetRight();
-    QString GetINN();
-    QString GetBirthday();
-    QString GetDeath();
-    QString GetOKVED();
-    QString GetActions();
-    QString GetAddress();
-    QString GetSite();
-    QString GetNumber();
-    QString GetEmail();
-    QString GetComment();
+    QString GetName() const;
+    QString GetRight() const;
+    QString GetINN() const;
+    QString GetBirthday() const;
+    QString GetDeath() const;
+    QString GetOKVED() const;
+    QString GetActions() const;
+    QString GetAddress() const;
+    QString GetSite() const;
+    QString GetNumber() const;
+    QString GetEmail() const;
+    QString GetComment() const;
     void SetTextName(const QString& text);
     void SetTextAddress(const QString& text);
     void SetTextPravo(const QString& text);
@@ -43,8 +46,6 @@ public:
     void SetTextAction(const QString& text);
     void SetTextSite(const QString& text);
     void SetTextEmail(const QString& text);
-
-
 
 private:
     Ui::ORG *ui;

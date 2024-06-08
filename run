@@ -1,12 +1,3 @@
 #!/bin/bash
-pip install -r requirements.txt
-pip install torchvision --upgrade
-pip install easyocr --upgrade
-
-python3 -m spacy download en_core_web_sm
-
-mkdir -p build
 cd build
-qmake ../App
-make
 ./App

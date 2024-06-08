@@ -1,4 +1,4 @@
-QT       += core gui sql
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,7 +18,8 @@ SOURCES += \
     org.cpp \
     recognize.cpp \
     startwindow.cpp \
-    visitki.cpp
+    visitki.cpp \
+    Database.cpp
 
 HEADERS += \
     cardform.h \
@@ -29,7 +30,8 @@ HEADERS += \
     org.h \
     recognize.h \
     startwindow.h \
-    visitki.h
+    visitki.h \
+    Database.h
 
 FORMS += \
     cardform.ui \
@@ -45,9 +47,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-RESOURCES += \
-    resources.qrc
 
 DISTFILES += \
     Design

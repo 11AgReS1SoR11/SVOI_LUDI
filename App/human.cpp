@@ -34,6 +34,60 @@ Human::Human(QWidget *parent) :
     Layout->addRow(tr("&Комментарий:"), Comment);
 }
 
+Human::Human(const QJsonObject& json, QWidget* parent) :
+    QWidget(parent),
+    ui(new Ui::Human)
+{
+    ui->setupUi(this);
+
+    Layout = new QFormLayout(this);
+
+    // информация о человеке
+    FIO = new QLineEdit(this);
+    FIO->setText(json["FIO"].toString());
+    Layout->addRow(tr("&ФИО:"), FIO);
+
+    Birthday = new QLineEdit(this);
+    Birthday->setText(json["Birthday"].toString());
+    Layout->addRow(tr("&Дата рождения:     "), Birthday);
+
+    Address = new QLineEdit(this);
+    Address->setText(json["Address"].toString());
+    Layout->addRow(tr("&Адрес:"), Address);
+
+    Actions = new QLineEdit(this);
+    Actions->setText(json["Actions"].toString());
+    Layout->addRow(tr("&Род занятий:"), Actions);
+
+    Titul = new QLineEdit(this);
+    Titul->setText(json["Titul"].toString());
+    Layout->addRow(tr("&Титул:"), Titul);
+
+    Number = new QLineEdit(this);
+    Number->setText(json["Number"].toString());
+    Layout->addRow(tr("&Телефон:"), Number);
+
+    Email = new QLineEdit(this);
+    Email->setText(json["Email"].toString());
+    Layout->addRow(tr("&Эл. Почта:"), Email);
+
+    Facebook = new QLineEdit(this);
+    Facebook->setText(json["Facebook"].toString());
+    Layout->addRow(tr("&Facebook:"), Facebook);
+
+    Occupation = new QLineEdit(this);
+    Occupation->setText(json["Occupation"].toString());
+    Layout->addRow(tr("&Должность:"), Occupation);
+
+    INN = new QLineEdit(this);
+    INN->setText(json["INN"].toString());
+    Layout->addRow(tr("&ИНН:"), INN);
+
+    Comment = new QLineEdit(this);
+    Comment->setText(json["Comment"].toString());
+    Layout->addRow(tr("&Комментарий:"), Comment);
+}
+
 Human::~Human()
 {
     delete ui;
@@ -51,7 +105,7 @@ Human::~Human()
     delete Comment;
 }
 
-QString Human::GetFIO()
+QString Human::GetFIO() const
 {
     QString fio = FIO->text();
     for (int i = fio.size()-1; i >= 0 && fio[i] == ' '; i--)
@@ -59,7 +113,7 @@ QString Human::GetFIO()
     return fio;
 }
 
-QString Human::GetSurname()
+QString Human::GetSurname() const
 {
     QString fio = GetFIO();
     QStringList names = fio.split(" ");
@@ -68,7 +122,7 @@ QString Human::GetSurname()
     return names[0];
 }
 
-QString Human::GetName()
+QString Human::GetName() const
 {
     QString fio = GetFIO();
     QStringList names = fio.split(" ");
@@ -78,7 +132,7 @@ QString Human::GetName()
 }
 
 
-QString Human::GetFatherName()
+QString Human::GetFatherName() const
 {
     QString fio = GetFIO();
     QStringList names = fio.split(" ");
@@ -87,52 +141,52 @@ QString Human::GetFatherName()
     return names[2];
 }
 
-QString Human::GetBirthday()
+QString Human::GetBirthday() const
 {
     return Birthday->text();
 }
 
-QString Human::GetAddress()
+QString Human::GetAddress() const
 {
     return Address->text();
 }
 
-QString Human::GetActions()
+QString Human::GetActions() const
 {
     return Actions->text();
 }
 
-QString Human::GetTitul()
+QString Human::GetTitul() const
 {
     return Titul->text();
 }
 
-QString Human::GetNumber()
+QString Human::GetNumber() const
 {
     return Number->text();
 }
 
-QString Human::GetEmail()
+QString Human::GetEmail() const
 {
     return Email->text();
 }
 
-QString Human::GetFacebook()
+QString Human::GetFacebook() const
 {
     return Facebook->text();
 }
 
-QString Human::GetOccupation()
+QString Human::GetOccupation() const
 {
     return Occupation->text();
 }
 
-QString Human::GetINN()
+QString Human::GetINN() const
 {
     return INN->text();
 }
 
-QString Human::GetComment()
+QString Human::GetComment() const
 {
     return Comment->text();
 }
